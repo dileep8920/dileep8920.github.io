@@ -262,16 +262,18 @@ header.shadow {
   color: #8b8a8f;
 }
 .project-content {
-  /* display: flex; */
+  display: grid;
+  justify-content: center;
+  align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(280px, auto));
   gap: 1rem;
   margin-top: 2rem;
 }
 .project-content .project-img{
-  display: flex;
-  margin: 2rem;
+  display: grid;
+  margin: 4rem;
   width: 60%;
-  /* align-items: left; */
+  align-items: left;
 }
 .project-img {
   overflow: hidden;
@@ -318,7 +320,7 @@ form textarea {
 .contact-button {
   width: 160px;
   cursor: pointer;
-  background: #2768d9;
+  background: rgb(53, 52, 52);
   color: #fff;
   justify-content: center;
   text-transform: uppercase;
@@ -340,7 +342,7 @@ form textarea {
   margin-bottom: 1.6rem;
 }
 .footer-social a i{
-  color: rgb(10, 26, 208);
+  color: black;
   font-size: 25px;
   margin-left: 10px;
   text-align: center;
@@ -352,7 +354,7 @@ form textarea {
 }
 .copyright {
   padding: 20px;
-  background: var(--main-color);
+  background:rgb(39, 38, 38);
   text-align: center;
   color: #fff;
 }
@@ -367,6 +369,9 @@ form textarea {
   section {
     padding: 50px 4%;
   }
+  .project-img{
+    width: 100%;
+  }
   
 }
 @media (max-width: 881px) {
@@ -374,7 +379,9 @@ form textarea {
     --big-font: 2.7rem;
     --medium-font: 1.4rem;
   }
-  
+  .project-img{
+    width: 100%;
+  }
 }
 @media (max-width: 768px) {
   :root {
@@ -383,6 +390,9 @@ form textarea {
   }
   header {
     padding: 11px 4%;
+  }
+  .project-img{
+    width: 60%;
   }
  
   #menu-icon {
@@ -468,7 +478,11 @@ form textarea {
     font-size: 1rem;
   }
   .project-content {
-    /* grid-template-columns: repeat(auto-fit, minmax(200px, auto)); */
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    justify-content: center;
+  }
+  .project-img{
+    width: 60%;
   }
   .contact-form form{
     width: 300px;

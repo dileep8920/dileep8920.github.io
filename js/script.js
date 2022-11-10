@@ -29,4 +29,10 @@ GitHubCalendar(".calendar", "dileep8920", { responsive: true });
         }
     }
 
+    var typed = new Typed(".tipical", {
+        strings: ["Dileep Yadav"],
+        typeSpeed:100,
+        backSpeed:100,
+        loop:true
+      });
   
