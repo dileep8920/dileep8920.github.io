@@ -1,3 +1,10 @@
+var typed = new Typed(".auto-type", {
+    strings: ["Java Backend Developer.","Problem Solver.", "Swimming Enthusiast." ],
+    typeSpeed: 100,
+    backSpeed: 100,
+    loop: true
+ })
+ 
 GitHubCalendar(".calendar", "dileep8920", { responsive: true });
     // Sticky Navbar
     let header = document.querySelector('header');
