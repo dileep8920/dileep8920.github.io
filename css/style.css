@@ -222,6 +222,7 @@ header.shadow {
   gap: 1rem;
   margin-top: 2rem;
 }
+
 .github-box {
   padding: 20px;
   width: 100%;
@@ -265,7 +266,7 @@ header.shadow {
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+  grid-template-columns: repeat(2,1fr);
   gap: 1rem;
   margin-top: 2rem;
 }
@@ -372,6 +373,10 @@ form textarea {
   .project-img{
     width: 100%;
   }
+  .project-content{
+    grid-template-columns: repeat(1,1fr);
+    justify-content: center;
+  }
   
 }
 @media (max-width: 881px) {
@@ -381,6 +386,10 @@ form textarea {
   }
   .project-img{
     width: 100%;
+  }
+  .project-content{
+    grid-template-columns: repeat(1,1fr);
+    justify-content: center;
   }
 }
 @media (max-width: 768px) {
@@ -478,7 +487,7 @@ form textarea {
     font-size: 1rem;
   }
   .project-content {
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    grid-template-columns: repeat(1,1fr);
     justify-content: center;
   }
   .project-img{
