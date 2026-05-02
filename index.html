@@ -4,428 +4,505 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dileep | Portfolio</title>
+    <title>Dileep Yadav | Backend Developer & SaaS Specialist</title>
+    
     <!-- Link To CSS -->
-    <link rel="stylesheet" href="./css/style.css">
-    <!-- link to github css -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- GitHub Calendar CSS -->
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
+    
     <!-- Box Icons -->
-    <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
- 
-  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
-        <a href="index.html" class="logo"> < Dileep Yadav ></Dileep></a>
- 
-        <div class="bx bx-menu" id="menu-icon"></div>
- 
-        <ul class="navbar">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#project">Project</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a
-                onclick="window.open('https://drive.google.com/file/d/1CLZrV6kO2WY5s68kdUL5o0GvSrGyX4zu/view?usp=sharing','_blank')"
-                class="resume-button"
-                href="Dileep_Yadav_Resume.pdf"
-                download="Dileep-Yadav-Resume.pdf"
-                title="download"
-                >Resume</a
-              ></li>
-            <!-- <div class="bx bx-moon" id="darkmode"></div> -->
-        </ul>
+    <!-- Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <span class="bracket">&lt;</span>Dileep<span class="bracket">/&gt;</span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="https://drive.google.com/file/d/1CLZrV6kO2WY5s68kdUL5o0GvSrGyX4zu/view?usp=sharing" class="nav-link cta-btn" target="_blank">Resume</a>
+            </nav>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
-    <!-- Home -->
- 
-    <section class="home" id="home">
-        <div class="social">
-            <a href="https://github.com/dileep8920" target="_blank"><i class='bx bxl-github'></i></a>
-            <a href="https://www.linkedin.com/in/dileep-kumar-yadav-969a73240/" target="_blank"><i class='bx bxl-dribbble' ></i></a>
-            <a href="https://leetcode.com/dileepkumary66"><i class='bx bx-code-alt' ></i></a>
-        </div>
-        <div class="home-img">
-            <img src="profilegif.gif" alt="">
-        </div>
-        <div class="home-text">
-            <span class="tipical">Hello, I'm</span>
 
-            <h1>Dileep Yadav</h1>
-
-            <h2><span class="auto-type">Backend Developer</span> </h2>
-
-            <p>Welcome to my website i will be glad to serve you </p>
-            <a href="#contact" class="btn">Contact Me</a>
-        </div>
- 
-    </section>
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="heading">
-            <h2>About Me</h2>
-            <span>Introduction</span>
-        </div>
-        <!-- About Content -->
-        <div class="about-container">
-            <div class="about-img">
-                <img src="profilepics.jpg" alt="">
-            </div>
-            <div class="about-text">
-                <p>Hi, I’m Dileep Yadav, An Implementation Specialist with 2 years at Meritto, progressing from Junior Developer to SaaS Developer and Implementation
-                    Specialist II.<br />
-                    Experienced in managing the NIAA (Chatbot) module, automating its implementation to reduce deployment time from 5-6
-                    days to just 1-2 days.<br />
-                    Skilled in client interaction (domestic and international), automation, telephony and exam integrations, workflow
-                    management, and landing page development using HTML, CSS, and JavaScript.<br />
-                    Proven ability to troubleshoot complex issues and collaborate with cross-functional teams to deliver efficient, high-quality
-                    solutions.
-                    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="greeting" data-aos="fade-up">
+                    <span class="wave">👋</span> Hi there, I'm
+                </div>
+                
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+                    Dileep Yadav
+                </h1>
+                
+                <div class="role-container" data-aos="fade-up" data-aos-delay="200">
+                    <p class="role-text">
+                        <span class="role-prefix">Backend Developer</span>
+                        <span class="role-dynamic" id="dynamicRole">& SaaS Specialist</span>
                     </p>
-                <div class="information">
-                    <!-- Box 1 -->
-                    <div class="info-box">
-                        <i class='bx bxs-user' ></i>
-                        <span>Dileep Kumar Yadav</span>
-                    </div>
-                    <!-- Box 2 -->
-                    <div class="info-box">
-                        <i class='bx bxs-phone' ></i>
-                        <span>+91 89202 85748</span>
-                    </div>
-                    <!-- Box 3 -->
-                    <div class="info-box">
-                        <i class='bx bxs-envelope' ></i>
-                        <span>dileepkumary669@gmail.com</span>
+                </div>
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    I build scalable backend systems and deliver seamless user experiences. 
+                    With 2+ years at Meritto, I've automated processes, reduced deployment time by 75%, 
+                    and worked with both domestic and international clients.
+                </p>
+                
+                <div class="hero-cta" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#contact" class="btn btn-primary">Let's Work Together</a>
+                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                </div>
+                
+                <div class="social-links" data-aos="fade-up" data-aos-delay="500">
+                    <a href="https://github.com/dileep8920" target="_blank" rel="noopener" title="GitHub">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/dileep-kumar-yadav-969a73240/" target="_blank" rel="noopener" title="LinkedIn">
+                        <i class='bx bxl-linkedin-square'></i>
+                    </a>
+                    <a href="https://leetcode.com/dileepkumary66" target="_blank" rel="noopener" title="LeetCode">
+                        <i class='bx bx-code-alt'></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
+                <div class="floating-card card-1">
+                    <div class="card-content">
+                        <span class="card-emoji">💻</span>
+                        <p>Backend</p>
                     </div>
                 </div>
-                <a
-                onclick="window.open('https://drive.google.com/file/d/1CLZrV6kO2WY5s68kdUL5o0GvSrGyX4zu/view?usp=sharing')"
-                class="btn"
-                href="Dileep_Yadav_Resume.pdf"
-                download="Dileep-Yadav-Resume.pdf"
-                title="download"
-                >Resume</a
-              >
+                <div class="floating-card card-2">
+                    <div class="card-content">
+                        <span class="card-emoji">🚀</span>
+                        <p>SaaS</p>
+                    </div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-content">
+                        <span class="card-emoji">⚙️</span>
+                        <p>Automation</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-    <!-- Skills -->
-    <section class="skills" id="skills">
-        <div class="heading">
-            <h2>Skills</h2>
-            <span>My Skills</span>
-        </div>
-        <!-- Skills Content -->
-        <div class="skills-container">
-                
-            <div class="skills-img">
-                <img src="html.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="css.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="js.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="java.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="mysql.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="spring.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="aws.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="github.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="sts.png" alt="">
-            </div>
-            <div class="skills-img">
-                <img src="gitbash.webp" alt="">
-            </div>
-
-            <div class="skills-img">
-                <img src="vs code.jpg" alt="">
-            </div>
-
-            <div class="skills-img">
-                <img src="swagger.png" alt="">
-            </div>
-        </div>
- 
-    </section>
-
-    <!-- Portfolio -->
-    <section class="project" id="project">
-        <div class="heading">
-            <h2>Projects</h2>
-            <span>Our Recent Work</span>
         </div>
         
-          
-        <div class="project-content">
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="mouse"></div>
+        </div>
+    </section>
 
-                <div class="project-img">
-                    <img src="meanbuy.png" class="work__img">
-
-            <h3 class="work__title">Meanbuy.com : Clone</h3>
-            <p>MeanBuy.in is an eCommerce Market Place Initiative for Businesses
-                and Stakeholders.</p>
-             <br>
-             <h5>Tech. Stack: Javascript | HTML | CSS | APIs</h5>
-             <br>
-            <a href="https://shiny-torrone-69ae7b.netlify.app/landing_page/" class="work__button" target="_blank">
-                🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            <a href="https://github.com/dileep8920/Meanbuy-Clone" class="work__button" target="_blank">
-                <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-               
-         </div>
-
-            <div class="project-img">
-                <img src="lumen5.png" class="work__img">
-
-            <h3 class="work__title">lumen5.com : Clone</h3>
-            <p>Lumen5 is a video creation platform designed for
-                businesses to produce video content.</p>
-             <br>
-             <h5>Tech. Stack: Javascript | HTML | CSS | JS</h5>
-             <br>
-            <a href="https://visionary-gumdrop-304cda.netlify.app/" class="work__button" target="_blank">
-                🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            <a href="https://github.com/visheshguria/Lumen5_Clone" class="work__button" target="_blank">
-                <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
             </div>
-
-            <div class="project-img">
-                <img src="sb101.png" class="work__img">
-
-            <h3 class="work__title">Student Registration</h3>
-            <p>It is for Student who can do their registration by their self Online</p>
-             <br>
-             <h5>Tech. Stack: Java | MySql </h5>
-             <br>
-            <a href="https://drive.google.com/file/d/1m_iUYTDASXPREdLTvatgCbVuokpQAGkD/view" class="work__button" target="_blank">
-                🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            <a href="https://github.com/dileep8920/Automated-Student-Registration-System" class="work__button" target="_blank">
-                <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            </div>
-
-
-            <div class="project-img">
-                <img src="wallet.jpg" class="work__img">
-
-            <h3 class="work__title">Payment Wallet</h3>
-            <p>It is for customer who can perfome multiple operation like transfer, get, put, Delete</p>
-             <br>
-             <h5>Tech. Stack: Core Java | MySql | hibernate | Swagger</h5>
-             <br>
-            <a href="https://drive.google.com/drive/folders/1EzTcJFcdWbhwbtABEYNZA6kRB67Neu2G" class="work__button" target="_blank">
-                🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            <a href="https://github.com/abhishek-0713/prompt-boundary-6500" class="work__button" target="_blank">
-                <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            </div>
-
             
-            <!-- <img src="./assets/img/naukri1.png" class="work__img">
-
-            <h3 class="work__title">Naukri.com : Clone</h3>
-            <h5>Naukri.com is a famous job portal which <br>
-                connect between job providers and <br> job Seekers.</h5>
-             <br>
-             <h5>Tech. Stack: Javascript | HTML | CSS | APIs</h5>
-             <br>
-            <a href="https://reliable-dragon-ca66f2.netlify.app/" class="work__button" target="_blank">
-                🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a>
-            <a href="https://github.com/NandlalShah955/tropical-action-4372" class="work__button" target="_blank">
-                <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-            </a> -->
-        </div>
-
-        <!-- <div class="project-content">
-
-            <img src="./assets/img/dermstore.png" class="work__img">
-            <br> <br>
-           <h3 class="work__title">Dermstore : Clone</h3>
-           <h5>Dermstore is a skin care and  <br> beauty e-commerce site in the United <br> States. 
-               This collaborative project was <br> developed by
-                five team members in 5 days.</h5>
-           <br> 
-           <h5>Tech. Stack: Javascript | HTML | CSS </h5>
-           <br>
-           <a href="https://dermstore-project-clone.netlify.app/" class="work__button" target="_blank">
-               🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-           </a>
-           <a href="https://github.com/TusharKadam7671/foregoing-tin-1857" class="work__button" target="_blank">
-               <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-           </a> -->
-        <!-- </div> -->
-
-    </section>
-
-    <!-- <section class="work section" id="work">
-        <span class="section__subtitle">My Portfolio</span>
-        <h2 class="section__title">Project Work</h2>
-        <div class="work__container container grid">
-
-       <div class="work__card mix web">
-                <img src="./assets/img/naukri1.png" class="work__img">
-
-                <h3 class="work__title">Naukri.com : Clone</h3>
-                <h5>Naukri.com is a famous job portal which <br>
-                    connect between job providers and <br> job Seekers.</h5>
-                 <br>
-                 <h5>Tech. Stack: Javascript | HTML | CSS | APIs</h5>
-                 <br>
-                <a href="https://reliable-dragon-ca66f2.netlify.app/" class="work__button" target="_blank">
-                    🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-                </a>
-                <a href="https://github.com/NandlalShah955/tropical-action-4372" class="work__button" target="_blank">
-                    <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-                </a>
-            </div>
-
-            <div class="work__card mix movil">
-                <img src="./assets/img/dermstore.png" class="work__img">
-                 <br> <br>
-                <h3 class="work__title">Dermstore : Clone</h3>
-                <h5>Dermstore is a skin care and  <br> beauty e-commerce site in the United <br> States. 
-                    This collaborative project was <br> developed by
-                     five team members in 5 days.</h5>
-                <br> 
-                <h5>Tech. Stack: Javascript | HTML | CSS </h5>
-                <br>
-                <a href="https://dermstore-project-clone.netlify.app/" class="work__button" target="_blank">
-                    🔗 Deployed <i class='bx bx-right-arrow-alt work__icon'></i>
-                </a>
-                <a href="https://github.com/TusharKadam7671/foregoing-tin-1857" class="work__button" target="_blank">
-                    <i class='bx bxl-github'></i>&nbsp; Code <i class='bx bx-right-arrow-alt work__icon'></i>
-                </a>
-            </div>
-
-</div>
-
-    </section> -->
-
-
-     <!-- Services -->
-     <section class="github" id="github">
-        <div class="heading">
-            <h2>Github</h2>
-            <span>Github stats</span>
-        </div>
-        <div class="github-content">
-            <!-- Box 1 -->
-            <div class="github-box">
-                <div class="calendar">
-                    <!-- Loading stuff -->
+            <div class="about-grid">
+                <div class="about-image" data-aos="fade-right">
+                    <div class="image-placeholder">
+                        <img width="400px" src="profilepics.jpg">
+                        <div class="image-badge">2+ Years Experience</div>
+                    </div>
+                </div>
+                
+                <div class="about-content" data-aos="fade-left">
+                    <p class="about-text">
+                        I'm Dileep Yadav, an Implementation Specialist with progressive growth from Junior Developer to SaaS Developer II at Meritto. I specialize in automating complex workflows and delivering solutions that directly impact business efficiency.
+                    </p>
                     
+                    <p class="about-text">
+                        <strong>Key Achievement:</strong> Automated the NIAA (Chatbot) module implementation, reducing deployment time from 5-6 days to 1-2 days — a 75% improvement that increased client satisfaction and team productivity.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class='bx bx-user'></i>
+                            <div>
+                                <span class="info-label">Name</span>
+                                <p class="info-value">Dileep Kumar Yadav</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class='bx bx-phone'></i>
+                            <div>
+                                <span class="info-label">Phone</span>
+                                <p class="info-value">+91 89202 85748</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class='bx bx-envelope'></i>
+                            <div>
+                                <span class="info-label">Email</span>
+                                <p class="info-value">dileepkumary669@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class='bx bx-map'></i>
+                            <div>
+                                <span class="info-label">Location</span>
+                                <p class="info-value">Gurugram, Haryana, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expertise">
+                        <h3>Core Expertise</h3>
+                        <ul>
+                            <li>✓ SaaS module automation & implementation</li>
+                            <li>✓ Client interaction & project management</li>
+                            <li>✓ Backend development with Java & Spring Boot</li>
+                            <li>✓ Database design & optimization</li>
+                            <li>✓ Cloud deployment (AWS)</li>
+                        </ul>
+                    </div>
                 </div>
-           
             </div>
-            <!-- Box 2 -->
-            <!-- <div class="github-box">
-                <div id="stats">
-
-                    <img align="center" src="https://github-readme-stats.vercel.app/api?username=dileep8920&show_icons=true&locale=en" alt="dileep8920" />
-                    <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=dileep8920&" alt="dileep8920" />
-                </div>
-                <div id="trophy">
-                    <img src="https://github-profile-trophy.vercel.app/?username=dileep8920" alt="dileep8920" />
-                </div>
-            </div> -->
-            <!-- Box 3 -->
-           
         </div>
     </section>
 
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Tools and technologies I work with</p>
+            </div>
+            
+            <div class="skills-grid" data-aos="fade-up">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bxl-java'></i>
+                    </div>
+                    <h3>Java</h3>
+                    <p>Core Java, OOP, Design Patterns</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bxl-spring-boot'></i>
+                    </div>
+                    <h3>Spring Boot</h3>
+                    <p>REST APIs, Microservices, Security</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bx-data'></i>
+                    </div>
+                    <h3>MySQL</h3>
+                    <p>Database Design, Queries, Optimization</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bxl-javascript'></i>
+                    </div>
+                    <h3>JavaScript</h3>
+                    <p>ES6+, DOM, Async Programming</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bxl-html5'></i>
+                    </div>
+                    <h3>HTML & CSS</h3>
+                    <p>Responsive Design, Semantic HTML</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bxl-git'></i>
+                    </div>
+                    <h3>Git & GitHub</h3>
+                    <p>Version Control, Collaboration</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bxl-aws'></i>
+                    </div>
+                    <h3>AWS</h3>
+                    <p>Cloud Deployment, EC2, RDS</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class='bx bx-code'></i>
+                    </div>
+                    <h3>APIs & Documentation</h3>
+                    <p>RESTful APIs, Swagger, Postman</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="Projects_statsmain__UgO5n" style="text-align: center">
-        <p>
-          <img
-            class="Projects_streak__2l65d"
-            align="center"
-            width="41%"
-            src="https://github-readme-stats.vercel.app/api?username=dileep8920&show_icons=true&locale=en&amp;&amp;theme=white"
-            alt="abhishek-0713"
-          />
-        </p>
-        <p>
-          &nbsp;<img
-            class="Projects_stats__dRYDv"
-            align="center"
-            width="41%"
-            src="https://github-readme-streak-stats.herokuapp.com/?user=dileep8920&&amp;show_icons=true&amp;locale=en&amp;theme=white"
-            alt="abhishek-0713"
-          />
-        </p>
-        <p>
-          <img
-            class="Projects_language__0ZGwa"
-            align="center"
-            width="41%"
-            src="https://github-profile-trophy.vercel.app/?username=dileep8920&amp;show_icons=true&amp;locale=en&amp;layout=compact&amp;theme=white"
-            alt="abhishek-0713"
-          />
-        </p>
-      </div>
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Work I'm proud of</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-header">
+                        <div class="project-tag">Frontend Clone</div>
+                        <div class="project-links">
+                            <a href="https://shiny-torrone-69ae7b.netlify.app/landing_page/" target="_blank" title="Live Demo">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                            <a href="https://github.com/dileep8920/Meanbuy-Clone" target="_blank" title="Source Code">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">MeanBuy E-Commerce Clone</h3>
+                    <p class="project-description">
+                        A fully functional e-commerce marketplace clone. Built a complete shopping experience with product catalog, cart functionality, and checkout process.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">APIs</span>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-header">
+                        <div class="project-tag">Frontend Clone</div>
+                        <div class="project-links">
+                            <a href="https://visionary-gumdrop-304cda.netlify.app/" target="_blank" title="Live Demo">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                            <a href="https://github.com/visheshguria/Lumen5_Clone" target="_blank" title="Source Code">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Lumen5 Video Creator Clone</h3>
+                    <p class="project-description">
+                        Video creation platform interface. Implemented responsive design and interactive features for content creators to produce videos efficiently.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-header">
+                        <div class="project-tag">Backend System</div>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1m_iUYTDASXPREdLTvatgCbVuokpQAGkD/view" target="_blank" title="Documentation">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                            <a href="https://github.com/dileep8920/Automated-Student-Registration-System" target="_blank" title="Source Code">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Student Registration System</h3>
+                    <p class="project-description">
+                        Automated registration system for educational institutions. Features include user authentication, data validation, and secure database management.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Swing UI</span>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-header">
+                        <div class="project-tag">Backend API</div>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/drive/folders/1EzTcJFcdWbhwbtABEYNZA6kRB67Neu2G" target="_blank" title="Documentation">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                            <a href="https://github.com/abhishek-0713/prompt-boundary-6500" target="_blank" title="Source Code">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Payment Wallet API</h3>
+                    <p class="project-description">
+                        Full-featured payment wallet system with multi-operations support. Built RESTful API with comprehensive documentation and Swagger integration.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Core Java</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Swagger</span>
+                        <span class="tech-tag">Hibernate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-   
-    <!-- Contact -->
+    <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="heading">
-            <h2>Contact</h2>
-            <span>--Get In Touch--</span>
-        </div>
-        <div class="contact-form">
-            <form action="">
-                <input type="text" placeholder="Your Name">
-                <input type="email" name="" id="" placeholder="Your Email">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Write Message Here..."></textarea>
-                <input type="button" value="Send" class="contact-button">
-            </form>
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Have an interesting opportunity? Let's talk!</p>
+            </div>
+            
+            <div class="contact-wrapper">
+                <div class="contact-form-container" data-aos="fade-right">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                placeholder="Your Name" 
+                                name="name"
+                                required
+                                class="form-input"
+                            >
+                            <span class="form-error" id="nameError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input 
+                                type="email" 
+                                placeholder="Your Email" 
+                                name="email"
+                                required
+                                class="form-input"
+                            >
+                            <span class="form-error" id="emailError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                placeholder="Subject" 
+                                name="subject"
+                                required
+                                class="form-input"
+                            >
+                            <span class="form-error" id="subjectError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea 
+                                placeholder="Your Message" 
+                                name="message"
+                                rows="5"
+                                required
+                                class="form-input"
+                            ></textarea>
+                            <span class="form-error" id="messageError"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary form-btn">
+                            <span class="btn-text">Send Message</span>
+                            <i class='bx bx-send'></i>
+                        </button>
+                        
+                        <p class="form-note" id="formNote"></p>
+                    </form>
+                </div>
+                
+                <div class="contact-info" data-aos="fade-left">
+                    <h3>Quick Contact Info</h3>
+                    
+                    <div class="contact-item">
+                        <i class='bx bx-envelope'></i>
+                        <div>
+                            <p class="contact-label">Email</p>
+                            <a href="mailto:dileepkumary669@gmail.com">dileepkumary669@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class='bx bx-phone'></i>
+                        <div>
+                            <p class="contact-label">Phone</p>
+                            <a href="tel:+918920285748">+91 89202 85748</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class='bx bx-map'></i>
+                        <div>
+                            <p class="contact-label">Location</p>
+                            <p>Gurugram, Haryana, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <p class="contact-label">Follow Me</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/dileep8920" target="_blank" rel="noopener" title="GitHub">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/dileep-kumar-yadav-969a73240/" target="_blank" rel="noopener" title="LinkedIn">
+                                <i class='bx bxl-linkedin-square'></i>
+                            </a>
+                            <a href="https://leetcode.com/dileepkumary66" target="_blank" rel="noopener" title="LeetCode">
+                                <i class='bx bx-code-alt'></i>
+                            </a>
+                            <a href="https://www.instagram.com/dileep_yaduvanshi/" target="_blank" rel="noopener" title="Instagram">
+                                <i class='bx bxl-instagram'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    <!-- Footer -->
-    <div class="footer">
-        <!-- <h2>Coding Home</h2> -->
-        <div class="footer-social">
-            <a href="https://www.facebook.com/profile.php?id=100012289696559" target="_blank"><i class='bx bxl-facebook' ></i></a>
-            <!-- <a href="#"><i class='bx bxl-twitter' ></i></a> -->
-            <a href="https://www.instagram.com/dileep_yaduvanshi/" target="_blank"><i class='bx bxl-instagram' ></i></a>
-            <a href="dileepkumary669@gmail.com" target="_blank"><i class='bx bxs-envelope' ></i></a>
-        </div>
- 
-    </div>
-    <!-- Copyright -->
-    <div class="copyright">
-        <p>Create By ❤️Dileep Yadav.</p>
-    </div>
- 
-    <!-- for github -->
-    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
- 
-    <!-- for naming -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
-    <!-- Link To JS -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Dileep Yadav. Crafted with <span class="heart">❤</span> by me.</p>
+                <p class="footer-links">
+                    <a href="https://github.com/dileep8920" target="_blank">GitHub</a>
+                    <a href="https://www.linkedin.com/in/dileep-kumar-yadav-969a73240/" target="_blank">LinkedIn</a>
+                    <a href="mailto:dileepkumary669@gmail.com">Email</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="./js/script.js"></script>
-  
 </body>
 </html>
