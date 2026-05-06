@@ -7,7 +7,7 @@
     <title>Dileep Yadav | Backend Developer & SaaS Specialist</title>
     
     <!-- Link To CSS -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     
     <!-- GitHub Calendar CSS -->
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
@@ -21,6 +21,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Custom Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <!-- Navigation -->
     <header class="header">
         <div class="nav-container">
@@ -31,6 +34,7 @@
             <nav class="nav-menu" id="navMenu">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#contact" class="nav-link">Contact</a>
@@ -47,7 +51,10 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
+        <!-- Canvas for particle background -->
+        <canvas id="particles-canvas"></canvas>
+        
+        <div class="container hero-content">
             <div class="hero-text">
                 <div class="greeting" data-aos="fade-up">
                     <span class="wave">👋</span> Hi there, I'm
@@ -59,20 +66,19 @@
                 
                 <div class="role-container" data-aos="fade-up" data-aos-delay="200">
                     <p class="role-text">
-                        <span class="role-prefix">Backend Developer</span>
-                        <span class="role-dynamic" id="dynamicRole">& SaaS Specialist</span>
+                        <span class="role-dynamic" id="dynamicRole">Backend Developer</span>
                     </p>
                 </div>
                 
                 <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
                     I build scalable backend systems and deliver seamless user experiences. 
-                    With 2+ years at Meritto, I've automated processes, reduced deployment time by 75%, 
+                    With 2+ years at Meritto, I've automated processes, <span class="highlight">reduced deployment time by 75%</span>, 
                     and worked with both domestic and international clients.
                 </p>
                 
                 <div class="hero-cta" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#contact" class="btn btn-primary">Let's Work Together</a>
-                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                    <a href="#contact" class="btn btn-primary">Contact Me</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
                 </div>
                 
                 <div class="social-links" data-aos="fade-up" data-aos-delay="500">
@@ -89,29 +95,38 @@
             </div>
             
             <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
-                <div class="floating-card card-1">
-                    <div class="card-content">
-                        <span class="card-emoji">💻</span>
-                        <p>Backend</p>
+                <div class="tech-ring-container">
+                    <div class="tech-ring-2"></div>
+                    <div class="tech-ring">
+                        <div class="tech-icon"><i class='bx bxl-html5'></i></div>
+                        <div class="tech-icon"><i class='bx bxl-javascript'></i></div>
+                        <div class="tech-icon"><i class='bx bxl-java'></i></div>
+                        <div class="tech-icon"><i class='bx bxl-spring-boot'></i></div>
+                    </div>
+                    <div class="profile-hex">
+                        <img src="profilegif.gif" alt="Dileep Yadav - Backend Developer" class="hero-profile-img">
                     </div>
                 </div>
-                <div class="floating-card card-2">
-                    <div class="card-content">
-                        <span class="card-emoji">🚀</span>
-                        <p>SaaS</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-num counter" data-target="2">+</div>
+                        <div class="stat-text">Years Exp</div>
                     </div>
-                </div>
-                <div class="floating-card card-3">
-                    <div class="card-content">
-                        <span class="card-emoji">⚙️</span>
-                        <p>Automation</p>
+                    <div class="stat-card">
+                        <div class="stat-num counter" data-target="75">%</div>
+                        <div class="stat-text">Efficiency Gain</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">50+</div>
+                        <div class="stat-text">Clients Handled</div>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="scroll-indicator">
-            <span>Scroll to explore</span>
+            <span>Scroll</span>
             <div class="mouse"></div>
         </div>
     </section>
@@ -125,10 +140,19 @@
             </div>
             
             <div class="about-grid">
-                <div class="about-image" data-aos="fade-right">
-                    <div class="image-placeholder">
-                        <img width="400px" src="profilepics.jpg">
-                        <div class="image-badge">2+ Years Experience</div>
+                <div class="about-visual" data-aos="fade-right">
+                    <div class="terminal-card">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <div class="terminal-btn close"></div>
+                                <div class="terminal-btn minimize"></div>
+                                <div class="terminal-btn maximize"></div>
+                            </div>
+                            <div class="terminal-title">Profile</div>
+                        </div>
+                        <div class="terminal-body">
+                            <img src="profilepics.jpg" alt="Dileep Yadav Profile Photo">
+                        </div>
                     </div>
                 </div>
                 
@@ -137,9 +161,9 @@
                         I'm Dileep Yadav, an Implementation Specialist with progressive growth from Junior Developer to SaaS Developer II at Meritto. I specialize in automating complex workflows and delivering solutions that directly impact business efficiency.
                     </p>
                     
-                    <p class="about-text">
-                        <strong>Key Achievement:</strong> Automated the NIAA (Chatbot) module implementation, reducing deployment time from 5-6 days to 1-2 days — a 75% improvement that increased client satisfaction and team productivity.
-                    </p>
+                    <div class="highlight-box">
+                        <p><strong>Key Achievement:</strong> Automated the NIAA (Chatbot) module implementation, reducing deployment time from 5-6 days to 1-2 days — a 75% improvement that increased client satisfaction and team productivity.</p>
+                    </div>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -171,17 +195,99 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="expertise">
-                        <h3>Core Expertise</h3>
-                        <ul>
-                            <li>✓ SaaS module automation & implementation</li>
-                            <li>✓ Client interaction & project management</li>
-                            <li>✓ Backend development with Java & Spring Boot</li>
-                            <li>✓ Database design & optimization</li>
-                            <li>✓ Cloud deployment (AWS)</li>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">My professional journey</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Current Role -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Present</span>
+                        <h3 class="timeline-role">Implementation Specialist III</h3>
+                        <div class="timeline-company">
+                            <i class='bx bx-building-house'></i> Meritto (formerly NoPaperForms)
+                        </div>
+                        <ul class="timeline-desc">
+                            <li>Leading implementation of complex SaaS modules for enterprise clients.</li>
+                            <li>Architecting automated workflows that significantly reduce manual effort.</li>
+                            <li>Mentoring junior team members and establishing best practices.</li>
                         </ul>
                     </div>
+                </div>
+                
+                <!-- Role 2 -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Previous</span>
+                        <h3 class="timeline-role">SaaS Developer II</h3>
+                        <div class="timeline-company">
+                            <i class='bx bx-building-house'></i> Meritto
+                        </div>
+                        <ul class="timeline-desc">
+                            <li>Automated the NIAA (Chatbot) module implementation process.</li>
+                            <li>Reduced module deployment time from 5-6 days to just 1-2 days (75% improvement).</li>
+                            <li>Managed configurations and deployments across multiple AWS environments.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Role 3 -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Past</span>
+                        <h3 class="timeline-role">Junior Developer</h3>
+                        <div class="timeline-company">
+                            <i class='bx bx-building-house'></i> Meritto
+                        </div>
+                        <ul class="timeline-desc">
+                            <li>Onboarded both domestic and international clients onto the SaaS platform.</li>
+                            <li>Resolved client technical queries and configured custom workflows.</li>
+                            <li>Collaborated with product teams to highlight platform improvements.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="awards" id="awards">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Awards & Achievements</h2>
+                <p class="section-subtitle">My recognitions</p>
+            </div>
+            
+            <div class="awards-grid">
+                <div class="award-card" data-aos="fade-up">
+                    <i class='bx bx-trophy award-icon'></i>
+                    <h3 class="award-title">Vishwakarma Award</h3>
+                    <div class="award-org">Meritto (Q1 FY 2025-26)</div>
+                </div>
+                
+                <div class="award-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class='bx bx-medal award-icon'></i>
+                    <h3 class="award-title">Pandavas Award</h3>
+                    <div class="award-org">Meritto (Q2 FY 2025-26)</div>
+                </div>
+                
+                <div class="award-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class='bx bx-star award-icon'></i>
+                    <h3 class="award-title">Brahamastra Award</h3>
+                    <div class="award-org">Meritto (Q3 FY 2025-26)</div>
                 </div>
             </div>
         </div>
@@ -195,69 +301,79 @@
                 <p class="section-subtitle">Tools and technologies I work with</p>
             </div>
             
-            <div class="skills-grid" data-aos="fade-up">
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bxl-java'></i>
+            <div class="skills-layout">
+                <!-- Core Skills (Bars) -->
+                <div class="skills-core" data-aos="fade-right">
+                    <div class="skill-category">
+                        <h3><i class='bx bx-code-alt'></i> Core Languages</h3>
+                        
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Java</span>
+                                <span class="skill-pct">90%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript / ES6+</span>
+                                <span class="skill-pct">80%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">SQL / MySQL</span>
+                                <span class="skill-pct">85%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML & CSS</span>
+                                <span class="skill-pct">75%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="75%"></div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Java</h3>
-                    <p>Core Java, OOP, Design Patterns</p>
                 </div>
                 
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bxl-spring-boot'></i>
+                <!-- Tools & Frameworks (Badges) -->
+                <div class="skills-tools" data-aos="fade-left">
+                    <div class="skill-category">
+                        <h3><i class='bx bx-layer'></i> Frameworks & Cloud</h3>
+                        <div class="skill-tags">
+                            <div class="skill-tag"><i class='bx bxl-spring-boot'></i> Spring Boot</div>
+                            <div class="skill-tag"><i class='bx bx-server'></i> Hibernate</div>
+                            <div class="skill-tag"><i class='bx bxl-aws'></i> AWS EC2</div>
+                            <div class="skill-tag"><i class='bx bx-data'></i> AWS RDS</div>
+                            <div class="skill-tag"><i class='bx bx-cloud'></i> Cloud Deployment</div>
+                        </div>
                     </div>
-                    <h3>Spring Boot</h3>
-                    <p>REST APIs, Microservices, Security</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bx-data'></i>
+                    
+                    <div class="skill-category">
+                        <h3><i class='bx bx-wrench'></i> Tools & Practices</h3>
+                        <div class="skill-tags">
+                            <div class="skill-tag"><i class='bx bxl-git'></i> Git / GitHub</div>
+                            <div class="skill-tag"><i class='bx bx-code'></i> RESTful APIs</div>
+                            <div class="skill-tag"><i class='bx bx-file'></i> Swagger</div>
+                            <div class="skill-tag"><i class='bx bx-send'></i> Postman</div>
+                            <div class="skill-tag"><i class='bx bx-sitemap'></i> Microservices</div>
+                            <div class="skill-tag"><i class='bx bx-lock-alt'></i> Security</div>
+                            <div class="skill-tag"><i class='bx bx-cog'></i> OOP / Design Patterns</div>
+                        </div>
                     </div>
-                    <h3>MySQL</h3>
-                    <p>Database Design, Queries, Optimization</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bxl-javascript'></i>
-                    </div>
-                    <h3>JavaScript</h3>
-                    <p>ES6+, DOM, Async Programming</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bxl-html5'></i>
-                    </div>
-                    <h3>HTML & CSS</h3>
-                    <p>Responsive Design, Semantic HTML</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bxl-git'></i>
-                    </div>
-                    <h3>Git & GitHub</h3>
-                    <p>Version Control, Collaboration</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bxl-aws'></i>
-                    </div>
-                    <h3>AWS</h3>
-                    <p>Cloud Deployment, EC2, RDS</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class='bx bx-code'></i>
-                    </div>
-                    <h3>APIs & Documentation</h3>
-                    <p>RESTful APIs, Swagger, Postman</p>
                 </div>
             </div>
         </div>
@@ -267,106 +383,105 @@
     <section class="projects" id="projects">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Featured Projects</h2>
+                <h2 class="section-title">Projects</h2>
                 <p class="section-subtitle">Work I'm proud of</p>
             </div>
             
             <div class="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card" data-aos="fade-up">
-                    <div class="project-header">
-                        <div class="project-tag">Frontend Clone</div>
-                        <div class="project-links">
-                            <a href="https://shiny-torrone-69ae7b.netlify.app/landing_page/" target="_blank" title="Live Demo">
-                                <i class='bx bx-link-external'></i>
-                            </a>
-                            <a href="https://github.com/dileep8920/Meanbuy-Clone" target="_blank" title="Source Code">
-                                <i class='bx bxl-github'></i>
-                            </a>
+                    <img src="meanbuy.png" alt="MeanBuy Clone" class="project-img">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-folder"><i class='bx bx-folder'></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/dileep8920/Meanbuy-Clone" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+                                <a href="https://shiny-torrone-69ae7b.netlify.app/landing_page/" target="_blank" title="Live Demo"><i class='bx bx-link-external'></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <h3 class="project-title">MeanBuy E-Commerce Clone</h3>
-                    <p class="project-description">
-                        A fully functional e-commerce marketplace clone. Built a complete shopping experience with product catalog, cart functionality, and checkout process.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">APIs</span>
+                        <h3 class="project-title">MeanBuy E-Commerce Clone</h3>
+                        <p class="project-description">
+                            A fully functional e-commerce marketplace clone. Built a complete shopping experience with product catalog, cart functionality, and checkout process.
+                        </p>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>APIs</span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 2 -->
                 <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-header">
-                        <div class="project-tag">Frontend Clone</div>
-                        <div class="project-links">
-                            <a href="https://visionary-gumdrop-304cda.netlify.app/" target="_blank" title="Live Demo">
-                                <i class='bx bx-link-external'></i>
-                            </a>
-                            <a href="https://github.com/visheshguria/Lumen5_Clone" target="_blank" title="Source Code">
-                                <i class='bx bxl-github'></i>
-                            </a>
+                    <img src="lumen5.png" alt="Lumen5 Clone" class="project-img">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-folder"><i class='bx bx-folder'></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/visheshguria/Lumen5_Clone" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+                                <a href="https://visionary-gumdrop-304cda.netlify.app/" target="_blank" title="Live Demo"><i class='bx bx-link-external'></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <h3 class="project-title">Lumen5 Video Creator Clone</h3>
-                    <p class="project-description">
-                        Video creation platform interface. Implemented responsive design and interactive features for content creators to produce videos efficiently.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
+                        <h3 class="project-title">Lumen5 Video Creator Clone</h3>
+                        <p class="project-description">
+                            Video creation platform interface. Implemented responsive design and interactive features for content creators to produce videos efficiently.
+                        </p>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 3 -->
                 <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-header">
-                        <div class="project-tag">Backend System</div>
-                        <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1m_iUYTDASXPREdLTvatgCbVuokpQAGkD/view" target="_blank" title="Documentation">
-                                <i class='bx bx-link-external'></i>
-                            </a>
-                            <a href="https://github.com/dileep8920/Automated-Student-Registration-System" target="_blank" title="Source Code">
-                                <i class='bx bxl-github'></i>
-                            </a>
-                        </div>
+                    <!-- Placeholder image if no specific image exists -->
+                    <div class="project-img" style="background: linear-gradient(45deg, #0f0c27, #00ff88); display: flex; align-items: center; justify-content: center;">
+                        <i class='bx bx-book-reader' style="font-size: 4rem; color: #151520;"></i>
                     </div>
-                    <h3 class="project-title">Student Registration System</h3>
-                    <p class="project-description">
-                        Automated registration system for educational institutions. Features include user authentication, data validation, and secure database management.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">Swing UI</span>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-folder"><i class='bx bx-folder'></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/dileep8920/Automated-Student-Registration-System" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+                                <a href="https://drive.google.com/file/d/1m_iUYTDASXPREdLTvatgCbVuokpQAGkD/view" target="_blank" title="Documentation"><i class='bx bx-file'></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Student Registration System</h3>
+                        <p class="project-description">
+                            Automated registration system for educational institutions. Features include user authentication, data validation, and secure database management.
+                        </p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>MySQL</span>
+                            <span>Swing UI</span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 4 -->
                 <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-header">
-                        <div class="project-tag">Backend API</div>
-                        <div class="project-links">
-                            <a href="https://drive.google.com/drive/folders/1EzTcJFcdWbhwbtABEYNZA6kRB67Neu2G" target="_blank" title="Documentation">
-                                <i class='bx bx-link-external'></i>
-                            </a>
-                            <a href="https://github.com/abhishek-0713/prompt-boundary-6500" target="_blank" title="Source Code">
-                                <i class='bx bxl-github'></i>
-                            </a>
+                    <img src="wallet.jpg" alt="Payment Wallet API" class="project-img">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-folder"><i class='bx bx-folder'></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/abhishek-0713/prompt-boundary-6500" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+                                <a href="https://drive.google.com/drive/folders/1EzTcJFcdWbhwbtABEYNZA6kRB67Neu2G" target="_blank" title="Documentation"><i class='bx bx-file'></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <h3 class="project-title">Payment Wallet API</h3>
-                    <p class="project-description">
-                        Full-featured payment wallet system with multi-operations support. Built RESTful API with comprehensive documentation and Swagger integration.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Core Java</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">Swagger</span>
-                        <span class="tech-tag">Hibernate</span>
+                        <h3 class="project-title">Payment Wallet API</h3>
+                        <p class="project-description">
+                            Full-featured payment wallet system with multi-operations support. Built RESTful API with comprehensive documentation and Swagger integration.
+                        </p>
+                        <div class="project-tech">
+                            <span>Core Java</span>
+                            <span>MySQL</span>
+                            <span>Swagger</span>
+                            <span>Hibernate</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -383,7 +498,8 @@
             
             <div class="contact-wrapper">
                 <div class="contact-form-container" data-aos="fade-right">
-                    <form class="contact-form" id="contactForm">
+                    <!-- Updated with actual Formspree endpoint -->
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwvybggl" method="POST">
                         <div class="form-group">
                             <input 
                                 type="text" 
@@ -421,7 +537,6 @@
                             <textarea 
                                 placeholder="Your Message" 
                                 name="message"
-                                rows="5"
                                 required
                                 class="form-input"
                             ></textarea>
@@ -490,7 +605,10 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 Dileep Yadav. Crafted with <span class="heart">❤</span> by me.</p>
+                <div class="footer-logo">
+                    <span class="bracket">&lt;</span>Dileep<span class="bracket">/&gt;</span>
+                </div>
+                <p class="footer-text">&copy; <span id="currentYear"></span> Dileep Yadav. Crafted with <span class="heart">❤</span> by me.</p>
                 <p class="footer-links">
                     <a href="https://github.com/dileep8920" target="_blank">GitHub</a>
                     <a href="https://www.linkedin.com/in/dileep-kumar-yadav-969a73240/" target="_blank">LinkedIn</a>
@@ -500,9 +618,14 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class='bx bx-up-arrow-alt'></i>
+    </div>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Removed Typed.js as we implemented custom typing effect in script.js -->
     <script src="./js/script.js"></script>
 </body>
 </html>

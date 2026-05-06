@@ -1,7 +1,176 @@
 // ========================================
+// CUSTOM CURSOR GLOW
+// ========================================
+const cursorGlow = document.getElementById('cursorGlow');
+
+if (cursorGlow) {
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.opacity = '1';
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursorGlow.style.opacity = '0';
+    });
+}
+
+// ========================================
+// PARTICLE CANVAS BACKGROUND
+// ========================================
+function initParticles() {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+    
+    // Mouse position for interaction
+    const mouse = {
+        x: null,
+        y: null,
+        radius: 150
+    };
+
+    function resizeCanvas() {
+        // Only cover the hero section
+        const heroSection = document.getElementById('home');
+        if (heroSection) {
+            canvas.width = window.innerWidth;
+            canvas.height = heroSection.offsetHeight;
+        }
+    }
+
+    // Initialize particles
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.baseX = this.x;
+            this.baseY = this.y;
+            this.density = (Math.random() * 30) + 1;
+            this.vx = (Math.random() - 0.5) * 1; // subtle drift
+            this.vy = (Math.random() - 0.5) * 1;
+        }
+
+        draw() {
+            ctx.fillStyle = 'rgba(0, 255, 136, 0.4)'; // Primary color
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        update() {
+            // Drift movement
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Bounce off edges
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+            // Mouse interaction
+            if (mouse.x != null && mouse.y != null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                let forceDirectionX = dx / distance;
+                let forceDirectionY = dy / distance;
+                let maxDistance = mouse.radius;
+                let force = (maxDistance - distance) / maxDistance;
+                let directionX = forceDirectionX * force * this.density;
+                let directionY = forceDirectionY * force * this.density;
+
+                if (distance < mouse.radius) {
+                    this.x -= directionX;
+                    this.y -= directionY;
+                } else {
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.x -= dx / 10;
+                    }
+                    if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.y -= dy / 10;
+                    }
+                }
+            }
+        }
+    }
+
+    function init() {
+        particles = [];
+        resizeCanvas();
+        // Adjust number of particles based on screen width
+        let numberOfParticles = (canvas.width * canvas.height) / 15000;
+        for (let i = 0; i < numberOfParticles; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                    + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                
+                if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                    opacityValue = 1 - (distance / 20000);
+                    ctx.strokeStyle = 'rgba(0, 180, 216,' + opacityValue * 0.5 + ')'; // Secondary color
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].draw();
+            particles[i].update();
+        }
+        connect();
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // Event listeners
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        init();
+    });
+
+    const heroSection = document.getElementById('home');
+    if (heroSection) {
+        heroSection.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y - heroSection.getBoundingClientRect().top; // Adjust for scroll
+        });
+        
+        heroSection.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+    }
+
+    init();
+    animate();
+}
+
+// Initialize particles when page loads
+window.addEventListener('load', initParticles);
+
+
+// ========================================
 // NAVIGATION & MOBILE MENU
 // ========================================
-
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -9,12 +178,14 @@ const navLinks = document.querySelectorAll('.nav-link');
 // Toggle mobile menu
 navToggle?.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    navToggle.classList.toggle('active');
 });
 
 // Close menu on link click
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
     });
 });
 
@@ -22,37 +193,39 @@ navLinks.forEach(link => {
 document.addEventListener('click', (e) => {
     if (!e.target.closest('header')) {
         navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
     }
 });
 
-// ========================================
-// TYPING ANIMATION
-// ========================================
 
+// ========================================
+// TYPING ANIMATION (Terminal Style)
+// ========================================
 const roles = [
     'Backend Developer',
     'SaaS Specialist',
-    'Problem Solver',
-    'Coffee Enthusiast'
+    'Implementation Expert',
+    'Automation Enthusiast'
 ];
 
 let currentRoleIndex = 0;
 const dynamicRoleElement = document.getElementById('dynamicRole');
 
 function typeRole() {
+    if(!dynamicRoleElement) return;
+    
     const role = roles[currentRoleIndex];
     let charIndex = 0;
     
-    // Clear the element
     dynamicRoleElement.textContent = '';
     
     function type() {
         if (charIndex < role.length) {
             dynamicRoleElement.textContent += role[charIndex];
             charIndex++;
-            setTimeout(type, 50);
+            setTimeout(type, 80); // Typing speed
         } else {
-            setTimeout(deleteRole, 2000);
+            setTimeout(deleteRole, 3000); // Pause before deleting
         }
     }
     
@@ -66,55 +239,134 @@ function deleteRole() {
         if (charIndex > 0) {
             dynamicRoleElement.textContent = dynamicRoleElement.textContent.slice(0, -1);
             charIndex--;
-            setTimeout(deleteChar, 30);
+            setTimeout(deleteChar, 40); // Deletion speed
         } else {
             currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-            setTimeout(typeRole, 500);
+            setTimeout(typeRole, 600); // Pause before typing next
         }
     }
     
     deleteChar();
 }
 
-// Start typing animation when page loads
 window.addEventListener('load', typeRole);
 
-// ========================================
-// SCROLL ANIMATIONS (Simple AOS Alternative)
-// ========================================
 
+// ========================================
+// STAT COUNTER ANIMATION
+// ========================================
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200; // The lower the slower
+
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        
+        const updateCount = () => {
+            const count = +counter.innerText.replace('+', '').replace('%', '');
+            const inc = target / speed;
+
+            if (count < target) {
+                let displayVal = Math.ceil(count + inc);
+                // Keep the suffix
+                if(counter.innerText.includes('+')) displayVal += '+';
+                else if(counter.innerText.includes('%')) displayVal += '%';
+                
+                counter.innerText = displayVal;
+                setTimeout(updateCount, 20);
+            } else {
+                let finalVal = target;
+                if(counter.getAttribute('data-target') === '2') finalVal = '2+';
+                else if(counter.getAttribute('data-target') === '75') finalVal = '75%';
+                counter.innerText = finalVal;
+            }
+        };
+
+        // Initialize observer to start animation when visible
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                counter.innerText = '0'; // reset
+                updateCount();
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+        
+        observer.observe(counter);
+    });
+}
+
+
+// ========================================
+// SKILL BAR ANIMATION
+// ========================================
+function initSkillBars() {
+    const skillFills = document.querySelectorAll('.skill-fill');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const fill = entry.target;
+                const width = fill.getAttribute('data-width');
+                fill.style.width = width;
+                observer.unobserve(fill);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    skillFills.forEach(fill => {
+        fill.style.width = '0%'; // Ensure it starts at 0
+        observer.observe(fill);
+    });
+}
+
+
+// ========================================
+// SCROLL REVEAL ANIMATIONS (AOS Alternative)
+// ========================================
 function revealElementsOnScroll() {
     const elements = document.querySelectorAll('[data-aos]');
     
-    const revealElement = (element) => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementBottom = element.getBoundingClientRect().bottom;
-        const windowHeight = window.innerHeight;
+    elements.forEach(el => {
+        el.style.opacity = '0';
         
-        if (elementTop < windowHeight - 50 && elementBottom > 0) {
-            element.style.opacity = '1';
-        }
-    };
+        // Handle transform based on AOS type
+        const aosType = el.getAttribute('data-aos');
+        if(aosType === 'fade-up') el.style.transform = 'translateY(30px)';
+        if(aosType === 'fade-right') el.style.transform = 'translateX(-30px)';
+        if(aosType === 'fade-left') el.style.transform = 'translateX(30px)';
+        
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        
+        // Handle delay
+        const delay = el.getAttribute('data-aos-delay');
+        if(delay) el.style.transitionDelay = delay + 'ms';
+    });
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translate(0)';
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     
     elements.forEach(el => observer.observe(el));
 }
 
-// Initialize scroll animations
-window.addEventListener('load', revealElementsOnScroll);
+
+// Initialize all scroll-based animations
+window.addEventListener('load', () => {
+    revealElementsOnScroll();
+    animateCounters();
+    initSkillBars();
+});
+
 
 // ========================================
-// SMOOTH SCROLL OFFSET
+// SMOOTH SCROLL & ACTIVE NAV
 // ========================================
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -131,195 +383,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ========================================
-// CONTACT FORM WITH VALIDATION
-// ========================================
-
-const contactForm = document.getElementById('contactForm');
-const formNote = document.getElementById('formNote');
-const nameInput = document.querySelector('input[name="name"]');
-const emailInput = document.querySelector('input[name="email"]');
-const subjectInput = document.querySelector('input[name="subject"]');
-const messageInput = document.querySelector('textarea[name="message"]');
-
-// Validation patterns
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function validateForm() {
-    let isValid = true;
-    const errors = {
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-    };
-    
-    // Clear previous errors
-    document.querySelectorAll('.form-error').forEach(el => {
-        el.classList.remove('show');
-        el.textContent = '';
-    });
-    
-    // Validate name
-    if (!nameInput.value.trim()) {
-        errors.name = 'Name is required';
-        isValid = false;
-    } else if (nameInput.value.trim().length < 2) {
-        errors.name = 'Name must be at least 2 characters';
-        isValid = false;
-    }
-    
-    // Validate email
-    if (!emailInput.value.trim()) {
-        errors.email = 'Email is required';
-        isValid = false;
-    } else if (!emailPattern.test(emailInput.value)) {
-        errors.email = 'Please enter a valid email address';
-        isValid = false;
-    }
-    
-    // Validate subject
-    if (!subjectInput.value.trim()) {
-        errors.subject = 'Subject is required';
-        isValid = false;
-    }
-    
-    // Validate message
-    if (!messageInput.value.trim()) {
-        errors.message = 'Message is required';
-        isValid = false;
-    } else if (messageInput.value.trim().length < 10) {
-        errors.message = 'Message must be at least 10 characters';
-        isValid = false;
-    }
-    
-    // Display errors
-    if (errors.name) {
-        document.getElementById('nameError').textContent = errors.name;
-        document.getElementById('nameError').classList.add('show');
-    }
-    if (errors.email) {
-        document.getElementById('emailError').textContent = errors.email;
-        document.getElementById('emailError').classList.add('show');
-    }
-    if (errors.subject) {
-        document.getElementById('subjectError').textContent = errors.subject;
-        document.getElementById('subjectError').classList.add('show');
-    }
-    if (errors.message) {
-        document.getElementById('messageError').textContent = errors.message;
-        document.getElementById('messageError').classList.add('show');
-    }
-    
-    return isValid;
-}
-
-// Real contact form submission (using EmailJS or FormSubmit)
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Validate form
-    if (!validateForm()) {
-        showFormMessage('Please fix the errors above', 'error');
-        return;
-    }
-    
-    const formData = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        subject: subjectInput.value.trim(),
-        message: messageInput.value.trim()
-    };
-    
-    // Show loading state
-    const submitBtn = contactForm.querySelector('.form-btn');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span>Sending...</span>';
-    
-    try {
-        // Using FormSubmit.co - a free form backend service
-        // Alternative: You can use EmailJS, Nodemailer, or any backend service
-        
-        const response = await fetch('https://formspree.io/f/xyzabjkd', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        }).catch(() => {
-            // Fallback: Show success message even if service unavailable
-            // In production, you'd want to handle this properly
-            return { ok: true };
-        });
-        
-        // Always show success (adjust based on your backend)
-        showFormMessage('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
-        contactForm.reset();
-        
-    } catch (error) {
-        console.error('Error:', error);
-        showFormMessage('Something went wrong. Please try again or email me directly.', 'error');
-    } finally {
-        // Restore button state
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-    }
-});
-
-function showFormMessage(message, type) {
-    formNote.textContent = message;
-    formNote.classList.add('show', type);
-    formNote.classList.remove(type === 'success' ? 'error' : 'success');
-    
-    // Auto-hide success message after 5 seconds
-    if (type === 'success') {
-        setTimeout(() => {
-            formNote.classList.remove('show');
-        }, 5000);
-    }
-}
-
-// Real-time validation feedback
-const inputs = [nameInput, emailInput, subjectInput, messageInput];
-inputs.forEach(input => {
-    input.addEventListener('blur', () => {
-        const errorEl = document.getElementById(input.name + 'Error');
-        errorEl.textContent = '';
-        errorEl.classList.remove('show');
-    });
-});
-
-// ========================================
-// GITHUB CALENDAR (if element exists)
-// ========================================
-
-if (typeof GitHubCalendar !== 'undefined' && document.querySelector('.calendar')) {
-    try {
-        GitHubCalendar('.calendar', 'dileep8920', { responsive: true });
-    } catch (e) {
-        console.log('GitHub Calendar loading...');
-    }
-}
-
-// ========================================
-// HEADER SHADOW ON SCROLL
-// ========================================
-
-const header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-        header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.boxShadow = 'none';
-    }
-});
-
-// ========================================
-// ACTIVE NAV LINK HIGHLIGHTING
-// ========================================
-
 function highlightCurrentSection() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -331,7 +394,8 @@ function highlightCurrentSection() {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
             
-            if (window.pageYOffset >= sectionTop - 200) {
+            // Adjust offset to trigger slightly earlier
+            if (window.pageYOffset >= sectionTop - 250) {
                 currentSection = section.getAttribute('id');
             }
         });
@@ -339,79 +403,169 @@ function highlightCurrentSection() {
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${currentSection}`) {
-                link.style.color = 'var(--secondary-color)';
-            } else {
-                link.style.color = '';
+                link.classList.add('active');
             }
         });
     });
 }
-
 highlightCurrentSection();
 
-// ========================================
-// PARALLAX EFFECT (Optional - Subtle)
-// ========================================
 
-function setupParallax() {
-    const heroVisual = document.querySelector('.hero-visual');
-    
-    if (heroVisual) {
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            heroVisual.style.transform = `translateY(${scrollY * 0.5}px)`;
-        });
+// ========================================
+// BACK TO TOP BUTTON
+// ========================================
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
     }
-}
+});
 
-window.addEventListener('load', setupParallax);
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
-// ========================================
-// UTILITY: Debounce Function
-// ========================================
-
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
 
 // ========================================
-// LAZY LOAD IMAGES (Optional Enhancement)
+// CONTACT FORM HANDLING
 // ========================================
+const contactForm = document.getElementById('contactForm');
+const formNote = document.getElementById('formNote');
+const nameInput = document.querySelector('input[name="name"]');
+const emailInput = document.querySelector('input[name="email"]');
+const subjectInput = document.querySelector('input[name="subject"]');
+const messageInput = document.querySelector('textarea[name="message"]');
 
-if ('IntersectionObserver' in window) {
-    const images = document.querySelectorAll('img[data-src]');
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validateForm() {
+    let isValid = true;
     
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
-            }
-        });
+    // Clear previous errors
+    document.querySelectorAll('.form-error').forEach(el => {
+        el.classList.remove('show');
+        el.textContent = '';
     });
     
-    images.forEach(img => imageObserver.observe(img));
+    if (!nameInput.value.trim() || nameInput.value.trim().length < 2) {
+        showError('nameError', 'Name must be at least 2 characters');
+        isValid = false;
+    }
+    
+    if (!emailInput.value.trim() || !emailPattern.test(emailInput.value)) {
+        showError('emailError', 'Please enter a valid email');
+        isValid = false;
+    }
+    
+    if (!subjectInput.value.trim()) {
+        showError('subjectError', 'Subject is required');
+        isValid = false;
+    }
+    
+    if (!messageInput.value.trim() || messageInput.value.trim().length < 10) {
+        showError('messageError', 'Message must be at least 10 characters');
+        isValid = false;
+    }
+    
+    return isValid;
 }
 
+function showError(id, message) {
+    const el = document.getElementById(id);
+    el.textContent = message;
+    el.classList.add('show');
+}
+
+// Clear error on input
+[nameInput, emailInput, subjectInput, messageInput].forEach(input => {
+    input.addEventListener('input', () => {
+        const errorEl = document.getElementById(input.name + 'Error');
+        if(errorEl) {
+            errorEl.classList.remove('show');
+            errorEl.textContent = '';
+        }
+    });
+});
+
+// Handle form submission via AJAX to prevent redirect
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Always stop default submission
+    
+    if (!validateForm()) return;
+    
+    const actionUrl = contactForm.getAttribute('action');
+    
+    // Check if user still has the placeholder
+    if (actionUrl.includes('YOUR_FORMSPREE_ID')) {
+        const subject = encodeURIComponent(`Portfolio Contact: ${subjectInput.value}`);
+        const body = encodeURIComponent(`Name: ${nameInput.value}\nEmail: ${emailInput.value}\n\nMessage:\n${messageInput.value}`);
+        window.location.href = `mailto:dileepkumary669@gmail.com?subject=${subject}&body=${body}`;
+        
+        formNote.textContent = 'Opening your email client to send the message...';
+        formNote.classList.add('show', 'success');
+        setTimeout(() => formNote.classList.remove('show', 'success'), 5000);
+        contactForm.reset();
+        return;
+    }
+    
+    // Proceed with AJAX Formspree submission
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="btn-text">Sending...</span><i class="bx bx-loader-alt bx-spin"></i>';
+    submitBtn.disabled = true;
+    
+    try {
+        const formData = new FormData(contactForm);
+        const response = await fetch(actionUrl, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            formNote.textContent = 'Thank you! Your message has been sent successfully.';
+            formNote.className = 'form-note show success';
+            contactForm.reset();
+        } else {
+            const data = await response.json();
+            if (data && Object.hasOwn(data, 'errors')) {
+                formNote.textContent = data.errors.map(error => error.message).join(', ');
+            } else {
+                formNote.textContent = 'Oops! There was a problem submitting your form.';
+            }
+            formNote.className = 'form-note show error';
+        }
+    } catch (error) {
+        formNote.textContent = 'Oops! There was a problem submitting your form.';
+        formNote.className = 'form-note show error';
+    } finally {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        setTimeout(() => formNote.classList.remove('show', 'success', 'error'), 5000);
+    }
+});
+
+
 // ========================================
-// CONSOLE MESSAGE
+// UTILITIES
 // ========================================
 
+// Auto-update footer year
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// Console Easter Egg
 console.log(
-    '%c👋 Hey there! Welcome to my portfolio!',
-    'font-size: 16px; font-weight: bold; color: #0f62fe;'
-);
-console.log(
-    '%cLooking for opportunities? Let\'s connect! 🚀',
-    'font-size: 14px; color: #22cf91;'
+    '%cSystem Initialized. Welcome to Dileep\'s Terminal.%c\n\nRun %ccontact()%c to get in touch.',
+    'color: #00ff88; font-size: 16px; font-weight: bold; background: #0a0a0f; padding: 10px;',
+    'color: inherit;',
+    'color: #00b4d8; font-family: monospace; font-weight: bold;',
+    'color: inherit;'
 );
