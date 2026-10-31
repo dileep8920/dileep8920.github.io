@@ -202,9 +202,9 @@ document.addEventListener('click', (e) => {
 // TYPING ANIMATION (Terminal Style)
 // ========================================
 const roles = [
+    'Lead Implementation',
     'Backend Developer',
     'SaaS Specialist',
-    'Implementation Expert',
     'Automation Enthusiast'
 ];
 
@@ -276,8 +276,11 @@ function animateCounters() {
                 setTimeout(updateCount, 20);
             } else {
                 let finalVal = target;
-                if(counter.getAttribute('data-target') === '2') finalVal = '2+';
+                if(counter.getAttribute('data-target') === '3') finalVal = '3+';
+                else if(counter.getAttribute('data-target') === '2') finalVal = '2+';
                 else if(counter.getAttribute('data-target') === '75') finalVal = '75%';
+                else if(counter.innerText.includes('+')) finalVal = target + '+';
+                else if(counter.innerText.includes('%')) finalVal = target + '%';
                 counter.innerText = finalVal;
             }
         };
@@ -555,11 +558,376 @@ contactForm.addEventListener('submit', async (e) => {
 
 
 // ========================================
+// ENTERPRISE PROJECT DETAILS MODAL ENGINE
+// ========================================
+const projectModalData = {
+    gtm: {
+        title: "GTM Configuration & Automation Tool",
+        badge: "Enterprise Automation",
+        icon: "bx bx-purchase-tag-alt",
+        tabs: {
+            overview: `
+                <div class="modal-card">
+                    <h4 class="modal-card-title"><i class='bx bx-info-circle'></i> Project Overview</h4>
+                    <p class="modal-card-text">
+                        Developed an end-to-end automation solution to simplify and accelerate Google Tag Manager (GTM) implementations for colleges and educational institutions. Previously, configuring GTM containers for educational portals required extensive manual coordination, client meetings, and manual creation of tags, triggers, and variables.
+                    </p>
+                </div>
+
+                <div class="problem-solution-grid">
+                    <div class="problem-card">
+                        <h4><i class='bx bx-error-circle'></i> The Problem</h4>
+                        <p>Implementing GTM tags, triggers, and custom variables required approximately <strong>3–5 hours</strong> of cross-team coordination, meetings, manual portal configuration, and internal efforts, with high susceptibility to human error across institutions.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4><i class='bx bx-check-circle'></i> The Automated Solution</h4>
+                        <p>Engineered an automated configuration pipeline that programmatically provisions tags, sets up complex event triggers, and maps variables via standardized JSON schemas, shrinking implementation time to just <strong>2–5 minutes</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="modal-card">
+                    <h4 class="modal-card-title"><i class='bx bx-star'></i> Key Features & Capabilities</h4>
+                    <div class="modal-features-grid">
+                        <div class="modal-feature-item">
+                            <i class='bx bx-check-shield'></i>
+                            <div>
+                                <div class="modal-feature-title">Automated Tag Provisioning</div>
+                                <p class="modal-feature-desc">Automated generation and deployment of Google Tag Manager tags including GA4 configurations and event trackers.</p>
+                            </div>
+                        </div>
+                        <div class="modal-feature-item">
+                            <i class='bx bx-target-lock'></i>
+                            <div>
+                                <div class="modal-feature-title">Automated Trigger Creation</div>
+                                <p class="modal-feature-desc">Dynamic rule generation for page views, button clicks, form submissions, and conversion funnels.</p>
+                            </div>
+                        </div>
+                        <div class="modal-feature-item">
+                            <i class='bx bx-code-curly'></i>
+                            <div>
+                                <div class="modal-feature-title">Dynamic Variable Configuration</div>
+                                <p class="modal-feature-desc">Standardized extraction and binding of DataLayer variables, college metadata, and tracking parameters.</p>
+                            </div>
+                        </div>
+                        <div class="modal-feature-item">
+                            <i class='bx bx-buildings'></i>
+                            <div>
+                                <div class="modal-feature-title">Multi-College Scalability</div>
+                                <p class="modal-feature-desc">Modular architecture enabling concurrent container setups for multiple college clients without manual configuration work.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            architecture: `
+                <div class="arch-workflow-container">
+                    <h4 class="modal-card-title" style="margin-bottom: 1.25rem;"><i class='bx bx-git-repo-forked'></i> GTM Automation Pipeline Architecture</h4>
+                    <div class="arch-steps-flow">
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-file-blank'></i></div>
+                            <div class="arch-node-title">1. Config Input</div>
+                            <div class="arch-node-desc">Container ID & institution tracking parameters</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-cog'></i></div>
+                            <div class="arch-node-title">2. Schema Engine</div>
+                            <div class="arch-node-desc">Standardized JSON schema builder & validator</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-layer-plus'></i></div>
+                            <div class="arch-node-title">3. Auto Generator</div>
+                            <div class="arch-node-desc">Programmatic Tag, Trigger & Variable synthesis</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bxl-google'></i></div>
+                            <div class="arch-node-title">4. GTM API Sync</div>
+                            <div class="arch-node-desc">Container workspace sync & instant versioning</div>
+                        </div>
+                    </div>
+
+                    <div class="arch-details-list">
+                        <div class="arch-detail-item">
+                            <div class="arch-detail-header"><i class='bx bx-terminal'></i> Tag Generation</div>
+                            <p class="arch-detail-desc">Constructs Google Analytics: GA4 Configuration tags and custom educational conversion tags without manual console clicks.</p>
+                        </div>
+                        <div class="arch-detail-item">
+                            <div class="arch-detail-header"><i class='bx bx-bolt-circle'></i> Trigger Rules</div>
+                            <p class="arch-detail-desc">Auto-binds firing rules: All Pages, Admission Form Submissions, Prospect Inquiries, and Brochure Downloads.</p>
+                        </div>
+                        <div class="arch-detail-item">
+                            <div class="arch-detail-header"><i class='bx bx-data'></i> Variable Mapping</div>
+                            <p class="arch-detail-desc">Maps user variables, campaign UTM parameters, institutional portal IDs, and DataLayer objects programmatically.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            impact: `
+                <div class="impact-stats-grid">
+                    <div class="impact-stat-box">
+                        <span class="stat-box-num">3-5h → 2-5m</span>
+                        <div class="stat-box-title">Implementation Effort</div>
+                        <div class="stat-box-sub">Over 98% reduction in hands-on time</div>
+                    </div>
+                    <div class="impact-stat-box">
+                        <span class="stat-box-num">100%</span>
+                        <div class="stat-box-title">Configuration Accuracy</div>
+                        <div class="stat-box-sub">Zero manual syntax or mapping errors</div>
+                    </div>
+                    <div class="impact-stat-box">
+                        <span class="stat-box-num">Multi-Client</span>
+                        <div class="stat-box-title">High Scalability</div>
+                        <div class="stat-box-sub">Handles high concurrent client onboarding</div>
+                    </div>
+                </div>
+
+                <div class="modal-card">
+                    <h4 class="modal-card-title"><i class='bx bx-user-check'></i> My Role & Contributions</h4>
+                    <p class="modal-card-text">
+                        As <strong>Lead Implementation</strong>, I spearheaded the concept, technical architecture, and deployment of this automation tool for Meritto's higher education clients. Standardized the configuration templates, engineered the automated generation scripts, eliminated repetitive internal meetings, and ensured flawless analytics tracking for multiple institutions.
+                    </p>
+                </div>
+
+                <div class="modal-card" style="margin-top: 1rem;">
+                    <h4 class="modal-card-title"><i class='bx bx-layer'></i> Verified Technologies & Integrations</h4>
+                    <div class="verified-tech-cloud">
+                        <span class="verified-pill"><i class='bx bx-purchase-tag-alt'></i> Google Tag Manager Container API</span>
+                        <span class="verified-pill"><i class='bx bxl-google'></i> GA4 (Google Analytics 4)</span>
+                        <span class="verified-pill"><i class='bx bxl-javascript'></i> JavaScript (ES6+)</span>
+                        <span class="verified-pill"><i class='bx bx-code-curly'></i> JSON Schema Automation</span>
+                        <span class="verified-pill"><i class='bx bx-data'></i> DataLayer Architecture</span>
+                        <span class="verified-pill"><i class='bx bx-check-shield'></i> Tag & Trigger Automation Engine</span>
+                    </div>
+                </div>
+            `
+        }
+    },
+    telephony: {
+        title: "Telephony Integration & Management Tool",
+        badge: "Cloud CTI & Telephony Gateway",
+        icon: "bx bx-phone-call",
+        tabs: {
+            overview: `
+                <div class="modal-card">
+                    <h4 class="modal-card-title"><i class='bx bx-info-circle'></i> Project Overview</h4>
+                    <p class="modal-card-text">
+                        Enterprise telephony integration architecture and automation tool developed at Meritto, connecting Meritto CRM with <strong>20+ leading cloud telephony providers</strong> for <strong>300+ educational institutions</strong>. Built to streamline admissions communications, provide Click-to-Call, synchronize real-time call logs, and automate CRM disposition.
+                    </p>
+                </div>
+
+                <div class="problem-solution-grid">
+                    <div class="problem-card">
+                        <h4><i class='bx bx-error-circle'></i> The Problem</h4>
+                        <p>300+ colleges utilized disparate cloud telephony vendors (Exotel, Knowlarity/Gupshup, Tata Tele, Mcube, etc.), each with incompatible API payloads, webhook schemas, and callback formats. This created severe logging delays, lost counselor attribution, and heavy manual troubleshooting.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4><i class='bx bx-check-circle'></i> The Unified Solution</h4>
+                        <p>Architected a centralized Telephony Integration Gateway that normalizes diverse vendor APIs, handles real-time webhooks, powers Click-to-Call CTI, synchronizes call recordings, and automates lead disposition updates directly within Meritto CRM.</p>
+                    </div>
+                </div>
+
+                <div class="modal-card">
+                    <h4 class="modal-card-title"><i class='bx bx-star'></i> Key Features & Capabilities</h4>
+                    <div class="modal-features-grid">
+                        <div class="modal-feature-item">
+                            <i class='bx bx-git-merge'></i>
+                            <div>
+                                <div class="modal-feature-title">Universal Telephony Adapter</div>
+                                <p class="modal-feature-desc">Standardized integration layer connecting 20+ vendors (Exotel, Knowlarity, Tata Tele, Mcube) seamlessly to Meritto CRM.</p>
+                            </div>
+                        </div>
+                        <div class="modal-feature-item">
+                            <i class='bx bx-phone-incoming'></i>
+                            <div>
+                                <div class="modal-feature-title">Click-to-Call & Real-Time CTI</div>
+                                <p class="modal-feature-desc">One-click outbound dialing from counselor lead profiles with live call status popups.</p>
+                            </div>
+                        </div>
+                        <div class="modal-feature-item">
+                            <i class='bx bx-sync'></i>
+                            <div>
+                                <div class="modal-feature-title">Bi-Directional Call Sync</div>
+                                <p class="modal-feature-desc">Automated ingestion of call duration, agent notes, call status, and recording URLs into student timelines.</p>
+                            </div>
+                        </div>
+                        <div class="modal-feature-item">
+                            <i class='bx bx-bug'></i>
+                            <div>
+                                <div class="modal-feature-title">Diagnostics & Webhook Resiliency</div>
+                                <p class="modal-feature-desc">Robust payload transformation, retry queues, and diagnostic tools to troubleshoot webhook delivery edge cases.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            architecture: `
+                <div class="arch-workflow-container">
+                    <h4 class="modal-card-title" style="margin-bottom: 1.25rem;"><i class='bx bx-sitemap'></i> Telephony Architecture & Webhook Data Flow</h4>
+                    <div class="arch-steps-flow">
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-user-voice'></i></div>
+                            <div class="arch-node-title">1. Counselor Action</div>
+                            <div class="arch-node-desc">Click-to-call or inbound student call trigger</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-shuffle'></i></div>
+                            <div class="arch-node-title">2. Meritto Gateway</div>
+                            <div class="arch-node-desc">Dispatches to assigned vendor API with auth</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-broadcast'></i></div>
+                            <div class="arch-node-title">3. Cloud Providers</div>
+                            <div class="arch-node-desc">Exotel / Knowlarity / Tata Tele / Mcube switches</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-transfer-alt'></i></div>
+                            <div class="arch-node-title">4. Webhook Receiver</div>
+                            <div class="arch-node-desc">Normalizes status callbacks & recording URLs</div>
+                        </div>
+                        <div class="arch-arrow"><i class='bx bx-chevron-right'></i></div>
+                        <div class="arch-node">
+                            <div class="arch-node-icon"><i class='bx bx-server'></i></div>
+                            <div class="arch-node-title">5. CRM Auto-Sync</div>
+                            <div class="arch-node-desc">Updates lead activity timeline & disposition</div>
+                        </div>
+                    </div>
+
+                    <div class="arch-details-list">
+                        <div class="arch-detail-item">
+                            <div class="arch-detail-header"><i class='bx bx-link-external'></i> Vendor Abstraction</div>
+                            <p class="arch-detail-desc">Decoupled CRM core from third-party vendor APIs through modular adapter interfaces and endpoint configurations.</p>
+                        </div>
+                        <div class="arch-detail-item">
+                            <div class="arch-detail-header"><i class='bx bx-pulse'></i> Webhook Processing</div>
+                            <p class="arch-detail-desc">Parses high-throughput asynchronous status events (ringing, answered, busy, disconnected) with near zero latency.</p>
+                        </div>
+                        <div class="arch-detail-item">
+                            <div class="arch-detail-header"><i class='bx bx-cloud-download'></i> Recording & Audit</div>
+                            <p class="arch-detail-desc">Automatically validates and associates secure call audio URLs with student records for quality control and compliance.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            impact: `
+                <div class="impact-stats-grid">
+                    <div class="impact-stat-box">
+                        <span class="stat-box-num">300+</span>
+                        <div class="stat-box-title">Institutions Powered</div>
+                        <div class="stat-box-sub">Seamless live telephony operations</div>
+                    </div>
+                    <div class="impact-stat-box">
+                        <span class="stat-box-num">20+</span>
+                        <div class="stat-box-title">Vendors Integrated</div>
+                        <div class="stat-box-sub">Exotel, Knowlarity, Tata Tele, Mcube, etc.</div>
+                    </div>
+                    <div class="impact-stat-box">
+                        <span class="stat-box-num">100%</span>
+                        <div class="stat-box-title">Automated Logging</div>
+                        <div class="stat-box-sub">Zero manual entry for admission counselors</div>
+                    </div>
+                </div>
+
+                <div class="modal-card">
+                    <h4 class="modal-card-title"><i class='bx bx-user-check'></i> My Role & Contributions</h4>
+                    <p class="modal-card-text">
+                        Coordinated with <strong>20+ cloud telephony vendors</strong> to define API contracts, webhook routing, and error recovery protocols. Designed and implemented the integration framework for <strong>300+ colleges</strong>, resolved critical webhook delivery and payload mismatch issues, and conducted technical workshops for seamless institutional onboarding.
+                    </p>
+                </div>
+
+                <div class="modal-card" style="margin-top: 1rem;">
+                    <h4 class="modal-card-title"><i class='bx bx-layer'></i> Verified Technologies & Integrations</h4>
+                    <div class="verified-tech-cloud">
+                        <span class="verified-pill"><i class='bx bx-phone-call'></i> Cloud Telephony APIs (Exotel, Knowlarity, Tata Tele, Mcube)</span>
+                        <span class="verified-pill"><i class='bx bx-code-alt'></i> RESTful Webhook Handlers</span>
+                        <span class="verified-pill"><i class='bx bxl-java'></i> Java / Spring Boot</span>
+                        <span class="verified-pill"><i class='bx bxl-javascript'></i> JavaScript (ES6+)</span>
+                        <span class="verified-pill"><i class='bx bx-shield-quarter'></i> Payload Validation & Error Handling</span>
+                        <span class="verified-pill"><i class='bx bx-sitemap'></i> Meritto CRM CTI Framework</span>
+                    </div>
+                </div>
+            `
+        }
+    }
+};
+
+let currentModalProject = 'gtm';
+let currentModalTab = 'overview';
+
+window.openProjectModal = function(projectId) {
+    const data = projectModalData[projectId];
+    if (!data) return;
+    
+    currentModalProject = projectId;
+    currentModalTab = 'overview';
+    
+    const backdrop = document.getElementById('projectModalBackdrop');
+    const titleEl = document.getElementById('modalProjectTitle');
+    const badgeEl = document.getElementById('modalProjectBadge');
+    const iconEl = document.getElementById('modalProjectIcon');
+    
+    if (titleEl) titleEl.textContent = data.title;
+    if (badgeEl) badgeEl.textContent = data.badge;
+    if (iconEl) iconEl.innerHTML = `<i class='${data.icon}'></i>`;
+    
+    window.switchModalTab('overview');
+    
+    if (backdrop) {
+        backdrop.classList.add('active');
+        backdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.closeProjectModal = function() {
+    const backdrop = document.getElementById('projectModalBackdrop');
+    if (backdrop) {
+        backdrop.classList.remove('active');
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+};
+
+window.switchModalTab = function(tabId) {
+    currentModalTab = tabId;
+    const data = projectModalData[currentModalProject];
+    if (!data) return;
+    
+    document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-tab') === tabId);
+    });
+    
+    const bodyEl = document.getElementById('projectModalBody');
+    if (bodyEl && data.tabs[tabId]) {
+        bodyEl.innerHTML = `<div class="modal-tab-panel active">${data.tabs[tabId]}</div>`;
+    }
+};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        window.closeProjectModal();
+    }
+});
+
+const backdropEl = document.getElementById('projectModalBackdrop');
+if (backdropEl) {
+    backdropEl.addEventListener('click', (e) => {
+        if (e.target === backdropEl) {
+            window.closeProjectModal();
+        }
+    });
+}
+
+// ========================================
 // UTILITIES
 // ========================================
 
 // Auto-update footer year
-document.getElementById('currentYear').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('currentYear'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Console Easter Egg
 console.log(
@@ -569,3 +937,120 @@ console.log(
     'color: #00b4d8; font-family: monospace; font-weight: bold;',
     'color: inherit;'
 );
+
+function initDileepAIChatbot() {
+    const trigger = document.getElementById('chatbotTrigger');
+    const windowEl = document.getElementById('chatbotWindow');
+    const closeBtn = document.getElementById('chatbotClose');
+    const clearBtn = document.getElementById('chatbotClear');
+    const form = document.getElementById('chatbotForm');
+    const input = document.getElementById('chatbotInput');
+    const messagesEl = document.getElementById('chatbotMessages');
+    const chipsContainer = document.getElementById('chatbotChips');
+
+    if (!trigger || !windowEl) return;
+
+    window.toggleDileepChatbot = (forceState) => {
+        if (typeof forceState === 'boolean') {
+            windowEl.classList.toggle('active', forceState);
+        } else {
+            windowEl.classList.toggle('active');
+        }
+    };
+
+    trigger.addEventListener('click', () => window.toggleDileepChatbot());
+    if (closeBtn) closeBtn.addEventListener('click', () => window.toggleDileepChatbot(false));
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+    }
+
+    function scrollToBottom() {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addUserMessage(text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-message user';
+        msgDiv.innerHTML = `
+            <div class="chat-avatar"><i class='bx bx-user'></i></div>
+            <div class="chat-bubble"><p>${escapeHTML(text)}</p></div>
+        `;
+        messagesEl.appendChild(msgDiv);
+        scrollToBottom();
+    }
+
+    const knowledgeBase = [
+        { keywords: ['skill', 'skills', 'stack', 'technology', 'tech', 'languages', 'java', 'spring', 'aws', 'gtm', 'telephony'], response: `<p>🚀 <strong>Core Technical Skills:</strong></p><ul><li><strong>Languages:</strong> Core Java, Spring Boot, JavaScript (ES6+), SQL, HTML5/CSS3</li><li><strong>Backend & CTI:</strong> REST APIs, Webhooks, Cloud Telephony APIs (Exotel, Knowlarity, Tata Tele, Mcube), Microservices</li><li><strong>Analytics & Cloud:</strong> Google Tag Manager (GTM API), GA4, AWS (EC2, RDS), CI/CD Automation</li></ul>` },
+        { keywords: ['experience', 'work', 'meritto', 'company', 'role', 'title', 'promotion', 'lead'], response: `<p>💼 <strong>Career at Meritto (3+ Years):</strong></p><ul><li><strong>Lead Implementation (July 2026–Present):</strong> Leading enterprise technical executions, GTM automation & telephony architecture.</li><li><strong>Implementation Specialist III (June 2023–July 2026):</strong> Deployed complex SaaS modules & telephony integrations for 300+ colleges.</li><li><strong>SaaS Developer II:</strong> Automated NIAA Chatbot deployments by 75%.</li><li><strong>Junior Developer:</strong> Onboarded 50+ domestic & international clients.</li></ul>` },
+        { keywords: ['project', 'projects', 'works', 'portfolio', 'gtm', 'telephony'], response: `<p>🛠️ <strong>Featured Enterprise Projects:</strong></p><ul><li><strong>GTM Configuration & Automation Tool:</strong> Slashed setup time from 3–5 hours down to 2–5 minutes (98% speedup).</li><li><strong>Telephony Integration Tool:</strong> Unified 20+ cloud telephony providers with Meritto CRM for 300+ institutions.</li><li><strong>NIAA Chatbot Module Pipeline:</strong> 75% efficiency improvement (5-6 days to 1-2 days).</li></ul>` },
+        { keywords: ['contact', 'email', 'phone', 'reach', 'hire'], response: `<p>📞 <strong>Get in Touch:</strong></p><ul><li>📧 <strong>Email:</strong> dileepkumary669@gmail.com</li><li>📱 <strong>Phone:</strong> +91 89202 85748</li><li>📍 <strong>Location:</strong> Gurugram, Haryana, India</li></ul>` }
+    ];
+
+    function matchKnowledge(query) {
+        const q = query.toLowerCase();
+        for (const item of knowledgeBase) {
+            for (const key of item.keywords) {
+                if (q.includes(key)) return item.response;
+            }
+        }
+        return `<p>I can help you learn more about Dileep's <strong>3+ years experience</strong>, <strong>skills</strong>, <strong>awards</strong>, or <strong>projects</strong>!</p>`;
+    }
+
+    function addBotResponse(queryText) {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message bot typing-msg';
+        typingDiv.innerHTML = `<div class="chat-avatar"><i class='bx bx-bot'></i></div><div class="chat-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+        messagesEl.appendChild(typingDiv);
+        scrollToBottom();
+
+        const matched = matchKnowledge(queryText);
+
+        setTimeout(() => {
+            typingDiv.remove();
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message bot';
+            msgDiv.innerHTML = `<div class="chat-avatar"><i class='bx bx-bot'></i></div><div class="chat-bubble">${matched}</div>`;
+            messagesEl.appendChild(msgDiv);
+            scrollToBottom();
+        }, 600);
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+        addUserMessage(text);
+        input.value = '';
+        addBotResponse(text);
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            messagesEl.innerHTML = `
+                <div class="chat-message bot">
+                    <div class="chat-avatar"><i class='bx bx-bot'></i></div>
+                    <div class="chat-bubble"><p>👋 Chat cleared! How else can I assist you?</p></div>
+                </div>
+            `;
+        });
+    }
+
+    if (chipsContainer) {
+        chipsContainer.addEventListener('click', (e) => {
+            const chip = e.target.closest('.chat-chip');
+            if (chip) {
+                const question = chip.getAttribute('data-question') || chip.textContent;
+                addUserMessage(question);
+                addBotResponse(question);
+            }
+        });
+    }
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initDileepAIChatbot();
+} else {
+    document.addEventListener('DOMContentLoaded', initDileepAIChatbot);
+    window.addEventListener('load', initDileepAIChatbot);
+}
